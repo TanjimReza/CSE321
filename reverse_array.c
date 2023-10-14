@@ -8,7 +8,7 @@ int main() {
         reversed_array[i] = my_array[9 - i];
     }
 
-
+    // ok
     for (int i = 0; i < 10; i++) {
         printf("%d ", reversed_array[i]);
     }
