@@ -1,13 +1,28 @@
 #include <stdio.h>
+#include <string.h>
+
+int old_or_new(char *old)
+{
+    char *domain = "sheba.xyz";
+    char *old_domain = old + strlen(old) - strlen(domain);
+
+    if (strcmp(old_domain, domain) == 0)
+    {
+        printf("Email address is okay");
+    }
+    else
+    {
+        printf("Email address is outdated");
+    }
+}
 
 int main()
 {
-    int text_size = 100;
+    char old[25];
+    printf("Enter email address: ");
+    scanf("%s", old);
 
-    if (text_size !> 100)
-    {
-        printf("Error: text_size must be less than or equal to 100");
-        return 1;
-    }
+    old_or_new(old);
+
     return 0;
 }

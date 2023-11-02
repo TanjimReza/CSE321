@@ -1,0 +1,31 @@
+﻿Task-1-a:
+
+mkdir 2010165_lab_asignment_1
+cd 2010165_lab_asignment_1
+touch 20101065_1.txt 20101065_2.txt 20101065_3.txt 20101065_4.txt
+mkdir TanjimReza1 TanjimReza2
+mv 20101065_1.txt 20101065_2.txt 20101065_3.txt  TanjimReza1/
+cp TanjimReza1/20101065_1.txt TanjimReza1/20101065_2.txt TanjimReza2/
+mkdir TanjimReza3
+cp -r TanjimReza1 TanjimReza3
+cd TanjimReza3
+ls -l -R
+chmod -R go=rx TanjimReza1/
+cd ..
+ls
+mv TanjimReza3/ /home/tanjimreza/
+rm -R *
+
+
+Task-1-b:
+
+touch course.txt
+grep -c CSE courses.txt
+
+Task-1-c: 
+
+ls -a
+
+Task-1-d:
+touch liner.txt
+sed -n '5,17p' liner.txt
