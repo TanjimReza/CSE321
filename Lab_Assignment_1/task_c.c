@@ -1,69 +1,102 @@
 #include <stdio.h>
 
+<<<<<<< HEAD
+=======
+int main()
+{
+    char password[50];
+    int len;
+    int lowercase;
+    int uppercase;
+    int digit;
+    int special;
 
-int main() {
+    lowercase = 0;
+    uppercase = 0;
+    digit = 0;
+    special = 0;
 
-    int lower_case = 0;
-    char lower_case_msg[] = "Lowercase missing";
-    
-    int upper_case = 0;
-    char upper_case_msg[] = "Uppercase missing";
+    printf("Enter password: ");
+    scanf("%s", password);
 
-    int digits = 0;
-    char digit_msg[] = "Digit missing";
+    len = strlen(password);
 
-    int special_characters = 0;
-    char special_characters_msg[] = "Special character missing";
-    
-    char output[] = "";
-
-    char input[100];
-    printf("Enter a string: ");
-    scanf("%s", input);
-
-    for (int i = 0; input[i] != '\0'; i++) {
-        if (input[i] >= 'a' && input[i] <= 'z') {
-            lower_case = 1;
-        } else if (input[i] >= 'A' && input[i] <= 'Z') {
-            upper_case = 1;
-        } else if (input[i] >= '0' && input[i] <= '9') {
-            digits = 1;
-        } else {
-            special_characters = 1;
+    for (int i = 0; i < len; i++)
+    {
+        if (password[i] >= 'a' && password[i] <= 'z')
+        {
+            lowercase = 1;
+        }
+        if (password[i] >= 'A' && password[i] <= 'Z')
+        {
+            uppercase = 1;
+        }
+        if (password[i] >= '0' && password[i] <= '9')
+        {
+            digit = 1;
+        }
+        else if (password[i] == '_' || password[i] == '$' || password[i] == '#' || password[i] == '@')
+        {
+            special = 1;
         }
     }
 
-    int previous_message = 0;
-
-    if (lower_case == 0) {
-        printf("%s", lower_case_msg);
-        previous_message = 1;
-
-    }
-    if (upper_case == 0) {
-        if (previous_message == 1) {
-            printf(", ");
-        }
-        printf("%s", upper_case_msg);
-        previous_message = 1;
-    }
-    if (digits == 0) {
-        if (previous_message == 1) {
-            printf(", ");
-        }
-        printf("%s", digit_msg);
-        previous_message = 1;
-    }
-    if (special_characters == 0) {
-        if (previous_message == 1) {
-            printf(", ");
-        }
-        printf("%s", special_characters_msg);
-        previous_message = 1;
+    if (lowercase == 0)
+    {
+        printf("Lowercase character missing, ");
     }
 
-    if (lower_case == 1 && upper_case == 1 && digits == 1 && special_characters == 1) {
-        printf("OK");
+    if (uppercase == 0)
+    {
+        printf("Uppercase character missing, ");
+    }
+
+    if (digit == 0)
+    {
+        printf("Digit missing, ");
+    }
+
+    if (special == 0)
+    {
+        printf("Special character missing");
+    }
+
+    if (lowercase && uppercase && digit && special)
+    {
+        printf("OK\n");
+    }
+    return 0;
+}
+#include <stdio.h>
+#include <string.h>
+
+int is_valid_email(char *email)
+{
+    char *domain = strstr(email, "sheba.xyz");
+    if (domain)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+>>>>>>> 91fac4fa361f1ec8fa82f4237a26eea17b9612f9
+
+int main()
+{
+    char email[100];
+    printf("Enter email ID: ");
+    scanf("%s", email);
+
+    if (is_valid_email(email))
+    {
+        printf("Email address is okay");
+    }
+    else
+    {
+        printf("Email address is outdated");
     }
 
     return 0;

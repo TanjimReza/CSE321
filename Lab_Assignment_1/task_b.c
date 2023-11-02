@@ -6,6 +6,7 @@ int main()
     char text[text_size];
     char output[text_size];
 
+<<<<<<< HEAD
     // Take input from file
     FILE *file_pointer;
     file_pointer = fopen("task_b_input.txt", "r");
@@ -44,5 +45,31 @@ int main()
     fprintf(file_pointer2, "%s", output);
     fclose(file_pointer2);
     
+=======
+    printf("Enter text: ");
+    fgets(text, text_size, stdin);
+    char *tok = text;
+    while (*tok != '\0')
+    {
+        if (*tok != ' ')
+        {
+            printf("%c", *tok);
+            fprintf(output, "%c", *tok);
+        }
+        else
+        {
+            printf(" ");
+            fprintf(output, " ");
+            while (*(tok + 1) == ' ')
+            {
+                tok++;
+            }
+        }
+        tok++;
+    }
+
+    fclose(output);
+    return 0;
+>>>>>>> 91fac4fa361f1ec8fa82f4237a26eea17b9612f9
     return 0;
 }
