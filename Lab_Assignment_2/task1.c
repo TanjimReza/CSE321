@@ -12,8 +12,6 @@ int item_cost(struct Item item)
     return item.quantity * item.unit_price;
 }
 
-
-
 int main()
 {
     int paratha_quantity = 0;
