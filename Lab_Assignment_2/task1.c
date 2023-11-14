@@ -61,4 +61,5 @@ int main()
 
     float individual_cost = total_price / number_of_people;
     printf("Individual people will pay: %.2f", individual_cost);
+    return 0;
 }
