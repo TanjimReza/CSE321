@@ -37,7 +37,8 @@ int main()
     }
     else if (child > 0)
     {
-        printf("1. Parent process ID: 0 \n");
+        printf("1. Parent process ID: 0");
+        printf("\n");
         wait(&status);
     }
     else
