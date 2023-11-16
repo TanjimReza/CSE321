@@ -2,6 +2,7 @@
 #include <string.h>
 #include <fcntl.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 int main(int argc, char *argv[])
 {
@@ -34,7 +35,7 @@ int main(int argc, char *argv[])
         int r = write(fp, user_input, strlen(user_input));
         if (r < 0)
         {
-            printf("Error writing to file\n");
+            printf("Error writing to #include <unistd.h>file\n");
             exit(1);
         }
     }
