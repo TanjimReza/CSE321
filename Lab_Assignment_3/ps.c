@@ -35,7 +35,7 @@ int main()
         processes[i].turn_around_time = 0;
         processes[i].waiting_time = 0;
 
-        printf("Arrival Time: %d\n", processes[i].arrival_time);
+        // printf("Arrival Time: %d\n", processes[i].arrival_time);
     }
     printf("Read Arrival Times \n");
     //! Reading Burst Times
@@ -71,79 +71,80 @@ int main()
         }
     }
     fclose(fp);
+    printf("Sorted \n");
 
-    int pid_highest_priority = processes[0].process_id;
-    int highest_priority = processes[0].priority;
-    printf("PID with highest priority: %d\n", pid_highest_priority);
-    printf("Highest Priority: %d\n", highest_priority);
+    // int count = 0;
+    // int t = 0;
+    // priority scheduling
+    // while (count < process_count)
+    // {
+    //     int min = process_count;
+    //     for (int i = 0; i < process_count; i++)
+    //     {
+    //         if (processes[i].arrival_time <= t && processes[i].priority < processes[min].priority && processes[i].completion_time == 0)
+    //         {
+    //             min = i;
+    //         }
+    //     }
+    //     if (min == process_count)
+    //     {
+    //         t++;
+    //         continue;
+    //     }
+    //     processes[min].remaining_burst_time--;
+    //     if (processes[min].remaining_burst_time == 0)
+    //     {
+    //         processes[min].completion_time = t + 1;
+    //         processes[min].turn_around_time = processes[min].completion_time - processes[min].arrival_time;
+    //         processes[min].waiting_time = processes[min].turn_around_time - processes[min].burst_time;
+
+    //         count++;
+    //     }
+    //     t++;
+    // }
+    int max_priority_process = 0;
     for (int i = 0; i < process_count; i++)
     {
-        // printf("Priority of %d is %d\n", processes[i].process_id, processes[i].priority);
-
-        if (processes[i].priority < highest_priority)
+        if (processes[i].priority < processes[max_priority_process].priority)
         {
-            // printf("New Priority of %d is %d\n", processes[i].process_id, processes[i].priority);
-            pid_highest_priority = processes[i].process_id;
-            highest_priority = processes[i].priority;
+            max_priority_process = i;
         }
     }
+    printf("max_priority_process: %d\n", max_priority_process);
+    int count = 0;
+    int t = 0;
+    sleep(1);
 
-    int completed = 0;
-    int time = 0;
-    printf("Going inside loop \n");
-    while (completed < process_count)
+    while (count < process_count)
     {
+        int max_priority_process = -1;
         for (int i = 0; i < process_count; i++)
         {
-            // printf("Priority of %d is %d\n", processes[i].process_id, processes[i].priority);
-
-            if (processes[i].priority < highest_priority && processes[i].priority >= 0)
+            if (processes[i].arrival_time <= t && processes[i].remaining_burst_time > 0 && processes[i].priority < processes[max_priority_process].priority)
             {
-                // printf("New Priority of %d is %d\n", processes[i].process_id, processes[i].priority);
-                pid_highest_priority = processes[i].process_id;
-                highest_priority = processes[i].priority;
+                max_priority_process = i;
             }
         }
-        printf("PID with highest priority: %d\n", pid_highest_priority);
-        printf("Highest Priority: %d\n", highest_priority);
+        processes[max_priority_process].remaining_burst_time--;
 
-        int s_p = pid_highest_priority;
-
-        for (int i = 0; i < process_count; i++)
+        if (processes[max_priority_process].remaining_burst_time == 0)
         {
-            if (processes[i].process_id == pid_highest_priority)
-            {
-
-                printf("Process %d is highest with %d priority \n", processes[i].process_id, processes[i].priority);
-                if (processes[i].arrival_time <= time && processes[i].remaining_burst_time > 0)
-                {
-                    processes[i].remaining_burst_time--;
-
-                    if (processes[i].remaining_burst_time == 0)
-                    {
-                        completed++;
-                        processes[i].completion_time = time + 1;
-                        processes[i].turn_around_time = processes[i].completion_time - processes[i].arrival_time;
-                        processes[i].waiting_time = processes[i].turn_around_time - processes[i].burst_time;
-                        break;
-                    }
-                }
-            }
+            count++;
+            processes[max_priority_process].completion_time = t + 1;
+            processes[max_priority_process].turn_around_time = processes[max_priority_process].completion_time - processes[max_priority_process].arrival_time;
+            processes[max_priority_process].waiting_time = processes[max_priority_process].turn_around_time - processes[max_priority_process].burst_time;
         }
-        time++;
-        printf("Time: %d\n", time);
+
+        t++;
     }
-
-    // printf("PID with highest priority: %d\n", pid_highest_priority);
-    // printf("Highest Priority: %d\n", highest_priority);
-
-    printf("PID\tArrival Time\tBurst Time\tPrioroty\tCompletion Time\tTurn Around Time\tWaiting Time\n");
+    printf("PID\tArrival Time\tBurst Time\tPriority\tCompletion Time\tTurn Around Time\tWaiting Time\n");
     for (int i = 0; i < process_count; i++)
     {
         printf("%d\t%d\t\t%d\t\t%d\t\t%d\t\t%d\t\t\t%d\n",
                processes[i].process_id,
                processes[i].arrival_time,
                processes[i].burst_time,
+               //    processes[i].remaining_burst_time,
                processes[i].priority,
                processes[i].completion_time,
                processes[i].turn_around_time,
