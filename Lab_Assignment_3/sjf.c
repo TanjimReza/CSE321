@@ -84,7 +84,6 @@ int main()
         t++;
     }
     printf("Printing \n");
-    // print the output
     printf("Process Id\tArrival Time\tBurst Time\tCompletion Time\tTurn Around Time\tWaiting Time\n");
     for (int i = 0; i < process_count; i++)
     {
