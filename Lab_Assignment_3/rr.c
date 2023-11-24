@@ -53,32 +53,54 @@ int main()
     // }
     printf("Read Burst Times \n");
 
+    // int time = 0;
+    // int flag = 1;
+    // while (flag)
+    // {
+    //     flag = 0;
+    //     for (int i = 0; i < process_count; i++)
+    //     {
+    //         if (processes[i].remaining_burst_time > time_quantum)
+    //         {
+    //             printf("Process %d is running for %d seconds\n", processes[i].process_id, time_quantum);
+    //             time = time + time_quantum;
+    //             processes[i].remaining_burst_time = processes[i].remaining_burst_time - time_quantum;
+    //             flag = 1;
+    //         }
+    //         else
+    //         {
+    //             time = time + processes[i].remaining_burst_time;
+    //             processes[i].remaining_burst_time = 0;
+    //             processes[i].completion_time = time;
+    //             processes[i].turn_around_time = processes[i].completion_time - processes[i].arrival_time;
+    //             processes[i].waiting_time = processes[i].turn_around_time - processes[i].burst_time;
+    //             flag = 1;
+    //         }
+    //     }
+    // }
     int time = 0;
-    int flag = 1;
-    while (flag)
+    int completed = 0;
+    while (process_count > completed)
     {
-        flag = 0;   
+
         for (int i = 0; i < process_count; i++)
         {
             if (processes[i].remaining_burst_time > time_quantum)
             {
-                printf("Process %d is running for %d seconds\n", processes[i].process_id, time_quantum);
-                time = time + time_quantum;
-                processes[i].remaining_burst_time = processes[i].remaining_burst_time - time_quantum;
-                flag = 1;
+                time += time_quantum;
+                processes[i].remaining_burst_time -= time_quantum;
             }
-            else 
+            else if (processes[i].remaining_burst_time > 0)
             {
-                time = time + processes[i].remaining_burst_time;
+                time += processes[i].remaining_burst_time;
                 processes[i].remaining_burst_time = 0;
                 processes[i].completion_time = time;
                 processes[i].turn_around_time = processes[i].completion_time - processes[i].arrival_time;
                 processes[i].waiting_time = processes[i].turn_around_time - processes[i].burst_time;
-                flag = 1;                
+                completed++;
             }
         }
     }
-
     printf("Process Id\tArrival Time\tBurst Time\tCompletion Time\tTurn Around Time\tWaiting Time\n");
     for (int i = 0; i < process_count; i++)
     {
