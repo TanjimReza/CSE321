@@ -21,13 +21,14 @@ int main()
     fscanf(fp, "%d", &process_count);
     printf("Process Count: %d\n", process_count);
 
-    struct Process processes[process_count+1];
+    struct Process processes[process_count + 1];
     //! Reading Arrival Times
     for (int i = 0; i < process_count; i++)
     {
         int temp;
         fscanf(fp, "%d", &temp);
         processes[i].arrival_time = temp;
+        processes[i].process_id = i;
         // printf("Arrival Time: %d\n", processes[i].arrival_time);
     }
     printf("here");
@@ -61,7 +62,7 @@ int main()
     int count = 0;
     int t = 0;
     int min = 0;
-    sleep(5);
+    sleep(1);
     while (count < process_count)
     {
         int min = process_count;
@@ -81,5 +82,12 @@ int main()
             processes[min].waiting_time = processes[min].turn_around_time - processes[min].burst_time;
         }
         t++;
+    }
+    printf("Printing \n");
+    // print the output
+    printf("Process Id\tArrival Time\tBurst Time\tCompletion Time\tTurn Around Time\tWaiting Time\n");
+    for (int i = 0; i < process_count; i++)
+    {
+        printf("%d\t\t%d\t\t%d\t\t%d\t\t%d\t\t\t%d\n", processes[i].process_id, processes[i].arrival_time, processes[i].burst_time, processes[i].completion_time, processes[i].turn_around_time, processes[i].waiting_time);
     }
 }
