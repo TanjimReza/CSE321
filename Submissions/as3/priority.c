@@ -18,10 +18,11 @@ struct Process
 int main()
 {
 
-    FILE *fp = fopen("ps_input.txt", "r");
+    FILE *fp = fopen("input_priority.txt", "r");
     int process_count = 0;
     fscanf(fp, "%d", &process_count);
-    printf("Process Count: %d\n", process_count);
+    // printf("Process Count: %d\n", process_count);
+    printf("\n");
 
     struct Process processes[process_count + 1];
     //! Reading Arrival Times
@@ -34,10 +35,7 @@ int main()
         processes[i].completion_time = 0;
         processes[i].turn_around_time = 0;
         processes[i].waiting_time = 0;
-
-        // printf("Arrival Time: %d\n", processes[i].arrival_time);
     }
-    printf("Read Arrival Times \n");
     //! Reading Burst Times
     for (int i = 0; i < process_count; i++)
     {
@@ -45,17 +43,13 @@ int main()
         fscanf(fp, "%d", &temp);
         processes[i].burst_time = temp;
         processes[i].remaining_burst_time = temp;
-        // printf("Burst Time: %d\n", processes[i].burst_time);
     }
     for (int i = 0; i < process_count; i++)
     {
         int temp;
         fscanf(fp, "%d", &temp);
         processes[i].priority = temp;
-        // processes[i].remaining_burst_time = temp;
-        // printf("Burst Time: %d\n", processes[i].burst_time);
     }
-    printf("Read Burst Times \n");
 
     //! Sorting the processes according to arrival time
     for (int i = 0; i < process_count; i++)
@@ -71,9 +65,6 @@ int main()
         }
     }
     fclose(fp);
-    printf("Sorted \n");
-
-    
     int max_priority_process = 0;
     for (int i = 0; i < process_count; i++)
     {
@@ -82,10 +73,9 @@ int main()
             max_priority_process = i;
         }
     }
-    printf("max_priority_process: %d\n", max_priority_process);
     int count = 0;
     int t = 0;
-    sleep(1);
+    // sleep(1);
 
     while (count < process_count)
     {
@@ -116,7 +106,6 @@ int main()
                processes[i].process_id,
                processes[i].arrival_time,
                processes[i].burst_time,
-               //    processes[i].remaining_burst_time,
                processes[i].priority,
                processes[i].completion_time,
                processes[i].turn_around_time,

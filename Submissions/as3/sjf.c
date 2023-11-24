@@ -16,10 +16,10 @@ struct Process
 };
 int main()
 {
-    FILE *fp = fopen("sjf_input.txt", "r");
+    FILE *fp = fopen("input_sjf.txt", "r");
     int process_count = 0;
     fscanf(fp, "%d", &process_count);
-    printf("Process Count: %d\n", process_count);
+    // printf("Process Count: %d\n", process_count);
 
     struct Process processes[process_count + 1];
     //! Reading Arrival Times
@@ -31,7 +31,7 @@ int main()
         processes[i].process_id = i;
         // printf("Arrival Time: %d\n", processes[i].arrival_time);
     }
-    printf("here");
+    // printf("here");
     //! Reading Burst Times
     for (int i = 0; i < process_count; i++)
     {
@@ -41,7 +41,7 @@ int main()
         processes[i].remaining_burst_time = temp;
         // printf("Burst Time: %d\n", processes[i].burst_time);
     }
-    printf("here");
+    // printf("here");
     processes[process_count].arrival_time = 9999;
     processes[process_count].burst_time = 9999;
     //! Sorting the processes according to arrival time
@@ -58,7 +58,7 @@ int main()
         }
     }
     fclose(fp);
-    printf("here");
+    // printf("here");
     int count = 0;
     int t = 0;
     int min = 0;
@@ -83,7 +83,7 @@ int main()
         }
         t++;
     }
-    printf("Printing \n");
+    // printf("Printing \n");
     printf("Process Id\tArrival Time\tBurst Time\tCompletion Time\tTurn Around Time\tWaiting Time\n");
     for (int i = 0; i < process_count; i++)
     {
