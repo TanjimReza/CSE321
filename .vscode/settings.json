@@ -6,6 +6,7 @@
     "types.h": "c",
     "fcntl.h": "c",
     "unistd.h": "c",
-    "stdlib.h": "c"
+    "stdlib.h": "c",
+    "semaphore.h": "c"
   }
 }
